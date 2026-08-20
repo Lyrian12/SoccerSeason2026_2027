@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Top Five Leagues</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f4f1ea;
+            font-family: Georgia, serif;
+            color: #1a1a1a;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        /* En-tête */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 25px 40px 15px 40px;
+            border-bottom: 1px solid #dcd6cb;
+        }
+
+        .header-title h3 {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: normal;
+            color: #555;
+            margin-bottom: 2px;
+        }
+
+        .header-title h1 {
+            font-size: 32px;
+            font-style: italic;
+            font-weight: normal;
+            letter-spacing: -0.5px;
+        }
+
+        .header-right {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        /* Grille des 5 championnats */
+        .leagues-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .league-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px 25px;
+            border-right: 1px solid #dcd6cb;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .league-card:last-child {
+            border-right: none;
+        }
+
+        /* Effet Hover (fond grisé et texte blanc au survol uniquement) */
+        .league-card:hover {
+            background-color: #a89f9e;
+            color: #ffffff;
+        }
+
+        .league-card:hover .league-name {
+            color: #ffffff;
+        }
+
+        /* Haut du cadre : checkbox + nom */
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .checkbox-box {
+            width: 14px;
+            height: 14px;
+            border: 1px solid currentColor;
+            opacity: 0.5;
+            margin-top: 4px;
+        }
+
+        .league-name {
+            font-size: 22px;
+            font-style: italic;
+            font-weight: normal;
+            letter-spacing: -0.5px;
+            color: #1a1a1a;
+            transition: color 0.3s ease;
+        }
+
+        /* Milieu : Logo grand, uniformisé et centré */
+        .card-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .league-logo {
+            max-width: 110px;
+            max-height: 110px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+<!-- En-tête du site -->
+<header>
+    <div class="header-title">
+        <h3>European Football</h3>
+        <h1>Top Five Leagues</h1>
+    </div>
+    <div class="header-right">
+        Overview / 01
+    </div>
+</header>
+
+<!-- Conteneur principal des 5 Ligues -->
+<section class="leagues-container">
+
+    <!-- 1. Premier League -->
+    <div class="league-card">
+        <div class="card-top">
+            <div class="checkbox-box"></div>
+            <h2 class="league-name" th:text="${premierLeagueName} ?: 'Premier League'">Premier League</h2>
+        </div>
+        <div class="card-center">
+            <img th:src="${premierLeagueLogo} ?: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg'"
+                 alt="Premier League Logo"
+                 class="league-logo"
+                 onerror="this.src='https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg'">
+        </div>
+    </div>
+
+    <!-- 2. La Liga -->
+    <div class="league-card" style="border-top: 2px solid #e07a5f;">
+        <div class="card-top">
+            <div class="checkbox-box"></div>
+            <h2 class="league-name" th:text="${laLigaName} ?: 'La Liga'">La Liga</h2>
+        </div>
+        <div class="card-center">
+            <!-- Utilisation d'un lien direct alternatif vers le logo de La Liga -->
+            <img th:src="${laLigaLogo} ?: 'https://assets.laliga.com/assets/logos/laliga-v/laliga-v-default.svg'"
+                 alt="La Liga Logo"
+                 class="league-logo">
+        </div>
+    </div>
+
+    <!-- 3. Serie A -->
+    <div class="league-card">
+        <div class="card-top">
+            <div class="checkbox-box"></div>
+            <h2 class="league-name" th:text="${serieAName} ?: 'Serie A'">Serie A</h2>
+        </div>
+        <div class="card-center">
+            <!-- Utilisation d'un lien direct alternatif pour la Serie A -->
+            <img th:src="${serieALogo} ?: 'https://upload.wikimedia.org/wikipedia/commons/e/e1/Logo_Serie_A_%282019%29.svg'"
+                 alt="Serie A Logo"
+                 class="league-logo">
+        </div>
+    </div>
+
+    <!-- 4. Bundesliga -->
+    <div class="league-card">
+        <div class="card-top">
+            <div class="checkbox-box"></div>
+            <h2 class="league-name" th:text="${bundesligaName} ?: 'Bundesliga'">Bundesliga</h2>
+        </div>
+        <div class="card-center">
+            <img th:src="${bundesligaLogo} ?: 'https://upload.wikimedia.org/wikipedia/en/d/df/Bundesliga_logo_%282017%29.svg'"
+                 alt="Bundesliga Logo"
+                 class="league-logo">
+        </div>
+    </div>
+
+    <!-- 5. Ligue 1 -->
+    <div class="league-card">
+        <div class="card-top">
+            <div class="checkbox-box"></div>
+            <h2 class="league-name" th:text="${ligue1Name} ?: 'Ligue 1'">Ligue 1</h2>
+        </div>
+        <div class="card-center">
+            <!-- Utilisation d'un lien direct alternatif pour la Ligue 1 -->
+            <img th:src="${ligue1Logo} ?: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Ligue_1_Uber_Eats_logo.svg'"
+                 alt="Ligue 1 Logo"
+                 class="league-logo">
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

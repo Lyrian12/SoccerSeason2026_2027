@@ -7,14 +7,12 @@ import java.util.Date;
 public class Player {
     int id;
     int Age;
-    StrongFoot strongfoot;
     String Name;
     String Surname;
-    String Nickname;
     PlayerPosition playerposition;
     Teams teams;
-    Date DateOfBirth;
     int height;
     int weight;
+    Country country;
 
 }

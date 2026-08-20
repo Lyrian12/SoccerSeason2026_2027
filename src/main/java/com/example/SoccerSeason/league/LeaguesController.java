@@ -1,9 +1,16 @@
 package com.example.SoccerSeason.league;
 
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@RestController
+
+@Controller
 public class LeaguesController {
 
+
+    @GetMapping("/leagues")
+    public String getLeagues() {
+        return "league";
+    }
 }
