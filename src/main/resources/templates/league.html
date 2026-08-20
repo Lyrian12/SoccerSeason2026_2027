@@ -149,7 +149,7 @@
             <h2 class="league-name" th:text="${premierLeagueName} ?: 'Premier League'">Premier League</h2>
         </div>
         <div class="card-center">
-            <img th:src="${premierLeagueLogo} ?: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg'"
+            <img th:src="@{/images/premier-league.svg}"
                  alt="Premier League Logo"
                  class="league-logo"
                  onerror="this.src='https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg'">
@@ -164,7 +164,7 @@
         </div>
         <div class="card-center">
             <!-- Utilisation d'un lien direct alternatif vers le logo de La Liga -->
-            <img th:src="${laLigaLogo} ?: 'https://assets.laliga.com/assets/logos/laliga-v/laliga-v-default.svg'"
+            <img th:src= "@{/images/LaLiga.svg}"
                  alt="La Liga Logo"
                  class="league-logo">
         </div>
@@ -178,7 +178,7 @@
         </div>
         <div class="card-center">
             <!-- Utilisation d'un lien direct alternatif pour la Serie A -->
-            <img th:src="${serieALogo} ?: 'https://upload.wikimedia.org/wikipedia/commons/e/e1/Logo_Serie_A_%282019%29.svg'"
+            <img th:src="@{/images/serieA.svg}"
                  alt="Serie A Logo"
                  class="league-logo">
         </div>
@@ -205,7 +205,7 @@
         </div>
         <div class="card-center">
             <!-- Utilisation d'un lien direct alternatif pour la Ligue 1 -->
-            <img th:src="${ligue1Logo} ?: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Ligue_1_Uber_Eats_logo.svg'"
+            <img th:src="@{/images/ligue1.svg}"
                  alt="Ligue 1 Logo"
                  class="league-logo">
         </div>
