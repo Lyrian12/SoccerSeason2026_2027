@@ -11,8 +11,8 @@
         }
 
         body {
-            background-color: #f4f1ea;
-            font-family: Georgia, serif;
+            background-color: #ffffff;
+            font-family: cursive;
             color: #1a1a1a;
             height: 100vh;
             display: flex;
@@ -67,7 +67,7 @@
             flex-direction: column;
             justify-content: space-between;
             padding: 30px 25px;
-            border-right: 1px solid #dcd6cb;
+            border-right: 1px solid #000000;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
@@ -78,9 +78,28 @@
 
         /* Effet Hover (fond grisé et texte blanc au survol uniquement) */
         .league-card:hover {
-            background-color: #a89f9e;
+            background-color: #9c5bdb;
             color: #ffffff;
         }
+
+        #league-card2:hover{
+            background-color: #d64e54;
+            color: #ffffff;
+        }
+        #league-card3:hover{
+            background-color: #1f1c1c;
+            color: #ffffff;
+        }
+        #league-card4:hover{
+            background-color: #fd2e2e;
+            color: #ffffff;
+        }
+        #league-card5:hover{
+            background-color: #4968dd;
+            color: #ffffff;
+        }
+
+
 
         .league-card:hover .league-name {
             color: #ffffff;
@@ -93,17 +112,11 @@
             gap: 12px;
         }
 
-        .checkbox-box {
-            width: 14px;
-            height: 14px;
-            border: 1px solid currentColor;
-            opacity: 0.5;
-            margin-top: 4px;
-        }
+
 
         .league-name {
             font-size: 22px;
-            font-style: italic;
+            font-style: normal;
             font-weight: normal;
             letter-spacing: -0.5px;
             color: #1a1a1a;
@@ -143,7 +156,7 @@
 <section class="leagues-container">
 
     <!-- 1. Premier League -->
-    <div class="league-card">
+    <div class="league-card" style="border-top: 4px solid #7523c7">
         <div class="card-top">
             <div class="checkbox-box"></div>
             <h2 class="league-name" th:text="${premierLeagueName} ?: 'Premier League'">Premier League</h2>
@@ -157,7 +170,7 @@
     </div>
 
     <!-- 2. La Liga -->
-    <div class="league-card" style="border-top: 2px solid #e07a5f;">
+    <div class="league-card" id="league-card2" style="border-top: 4px solid #ec6c11;">
         <div class="card-top">
             <div class="checkbox-box"></div>
             <h2 class="league-name" th:text="${laLigaName} ?: 'La Liga'">La Liga</h2>
@@ -171,7 +184,7 @@
     </div>
 
     <!-- 3. Serie A -->
-    <div class="league-card">
+    <div class="league-card" id="league-card3" style="border-top: 4px solid #000000">
         <div class="card-top">
             <div class="checkbox-box"></div>
             <h2 class="league-name" th:text="${serieAName} ?: 'Serie A'">Serie A</h2>
@@ -185,7 +198,7 @@
     </div>
 
     <!-- 4. Bundesliga -->
-    <div class="league-card">
+    <div class="league-card" id="league-card4" style="border-top:4px solid #ee0808">
         <div class="card-top">
             <div class="checkbox-box"></div>
             <h2 class="league-name" th:text="${bundesligaName} ?: 'Bundesliga'">Bundesliga</h2>
@@ -198,14 +211,14 @@
     </div>
 
     <!-- 5. Ligue 1 -->
-    <div class="league-card">
+    <div class="league-card" id="league-card5" style="border-top: 4px solid #122dc8">
         <div class="card-top">
             <div class="checkbox-box"></div>
             <h2 class="league-name" th:text="${ligue1Name} ?: 'Ligue 1'">Ligue 1</h2>
         </div>
         <div class="card-center">
             <!-- Utilisation d'un lien direct alternatif pour la Ligue 1 -->
-            <img th:src="@{/images/ligue1.svg}"
+            <img th:src="@{/images/ligue1.jpeg}"
                  alt="Ligue 1 Logo"
                  class="league-logo">
         </div>
