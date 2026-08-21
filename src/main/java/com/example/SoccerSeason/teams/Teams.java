@@ -16,15 +16,11 @@ public class Teams {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
-
     @NotNull
     String name;
-
     @ManyToOne
     @JoinColumn(name = "league_id")
     Leagues leagues;
-
     @OneToMany(mappedBy = "teams", cascade = CascadeType.ALL)
     private List<Player> players;
 

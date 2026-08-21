@@ -14,9 +14,6 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
-    @NotNull
-    int Age;
     @NotNull
     String Name;
     @NotNull
@@ -26,11 +23,4 @@ public class Player {
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)
     Teams teams;
-    @NotNull
-    int height;
-    @NotNull
-    int weight;
-    @Enumerated(EnumType.STRING)
-    Country country;
-
 }

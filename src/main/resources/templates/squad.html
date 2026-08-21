@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Squad Profile</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f4f1ea;
+            font-family: Georgia, serif;
+            color: #1a1a1a;
+            padding: 30px 40px;
+        }
+
+        /* En-tête */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid #dcd6cb;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header-left h3 {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: normal;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        .header-left h1 {
+            font-size: 36px;
+            font-style: italic;
+            font-weight: normal;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .back-link {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #555;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #1a1a1a;
+            text-decoration: underline;
+        }
+
+        /* Catégories de postes (ex: Goalkeepers, Midfielders...) */
+        .position-category {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #777;
+            margin: 30px 0 15px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #dcd6cb;
+        }
+
+        /* Ligne de joueur */
+        .player-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px;
+            background-color: #f4f1ea;
+            border-bottom: 1px solid #dcd6cb;
+            transition: background-color 0.2s ease;
+        }
+
+        .player-row:hover {
+            background-color: #eae5dc;
+        }
+
+        .player-main {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            min-width: 250px;
+        }
+
+        .player-number {
+            font-size: 14px;
+            color: #888;
+            font-style: italic;
+            width: 20px;
+            text-align: right;
+        }
+
+        .player-name {
+            font-size: 18px;
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        /* Statistiques dynamiques du joueur */
+        .player-stats {
+            display: flex;
+            gap: 60px;
+            flex-grow: 1;
+            justify-content: flex-end;
+            margin-right: 40px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #777;
+            margin-bottom: 2px;
+        }
+
+        .stat-value {
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        /* Badge du poste basé sur l'Enum */
+        .position-badge {
+            font-size: 10px;
+            padding: 4px 10px;
+            border: 1px solid #dcd6cb;
+            background-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #333;
+            min-width: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- En-tête épuré -->
+<header>
+    <div class="header-left">
+        <h3 th:text="${leagueName} + ' / ' + ${teamName}">Premier League / Manchester City</h3>
+        <h1>Squad Profile</h1>
+        <a th:href="@{/teams(leagueId=${leagueId})}" class="back-link">&larr; Back to Teams</a>
+    </div>
+</header>
+
+<!-- Liste dynamique groupée par l'Enum PlayerPosition -->
+<main>
+    <div th:each="positionEntry : ${squadByPosition}">
+
+        <!-- Titre de la catégorie de poste formaté proprement (ex: CENTER_BACK -> Center Back) -->
+        <div class="position-category" th:text="${#strings.replace(positionEntry.key.name(), '_', ' ')}">
+            Center Back
+        </div>
+
+        <!-- Liste des joueurs pour ce poste -->
+        <div class="player-row" th:each="player, iterStat : ${positionEntry.value}">
+            <div class="player-main">
+                <span class="player-number" th:text="${player.number}">02</span>
+                <span class="player-name" th:text="${player.name}">Kyle Walker</span>
+            </div>
+
+            <!-- Statistiques dynamiques (injectées depuis le backend) -->
+            <div class="player-stats">
+                <div class="stat-item" th:each="stat : ${player.stats}">
+                    <span class="stat-label" th:text="${stat.key}">Top Speed</span>
+                    <span class="stat-value" th:text="${stat.value}">37.2 km/h</span>
+                </div>
+            </div>
+
+            <!-- Badge du poste issu de l'Enum -->
+            <div class="position-badge" th:text="${player.positionCode}">RB</div>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>
