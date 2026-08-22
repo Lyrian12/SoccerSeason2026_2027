@@ -126,7 +126,7 @@
 <!-- En-tête dynamique selon la ligue -->
 <header>
     <div class="header-title">
-        <h3>European Football / <span th:text="${leagueName} ?: 'Premier League'">Premier League</span></h3>
+        <h3>European Football / <span th:text="${leagueName} ?: 'Premier League'"></span></h3>
         <h1>Participating Clubs</h1>
     </div>
     <div class="header-right">
@@ -137,12 +137,12 @@
 <!-- Grille des clubs -->
 <section class="clubs-grid">
 
-    <!-- Boucle Thymeleaf pour afficher les équipes de la liste passée par le contrôleur -->
-<!--    <div class="club-card" th:each="club, iterStat : ${clubs}">-->
-<!--        <div class="club-index" th:text="${iterStat.count < 10 ? '0' + iterStat.count : iterStat.count}">01</div>-->
-<!--        <h2 class="club-name" th:text="${club.name}">Manchester City</h2>-->
-<!--        <div class="club-bottom"></div>-->
-<!--    </div>-->
+     Boucle Thymeleaf pour afficher les équipes de la liste passée par le contrôleur
+    <div class="club-card" th:each="club, iterStat : ${clubs}">
+        <div class="club-index" th:text="${iterStat.count < 10 ? '0' + iterStat.count : iterStat.count}">01</div>
+        <h2 class="club-name" th:text="${club.name}">Manchester City</h2>
+        <div class="club-bottom"></div>
+    </div>
 
 </section>
 

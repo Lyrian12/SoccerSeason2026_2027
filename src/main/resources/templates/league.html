@@ -62,6 +62,10 @@
         }
 
         .league-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            height: 100%;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -72,12 +76,13 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+
         .league-card:last-child {
             border-right: none;
         }
 
         /* Effet Hover (fond grisé et texte blanc au survol uniquement) */
-        .league-card:hover {
+        #league-card1:hover {
             background-color: #9c5bdb;
             color: #ffffff;
         }
@@ -156,9 +161,9 @@
 <section class="leagues-container">
 
     <!-- 1. Premier League -->
-    <div class="league-card" style="border-top: 4px solid #7523c7">
+    <div class="league-card" style="border-top: 4px solid #7523c7" id="league-card1">
+        <a th:href="@{/leagues/1/teams}" class="league-card"  >
         <div class="card-top">
-            <div class="checkbox-box"></div>
             <h2 class="league-name" th:text="${premierLeagueName} ?: 'Premier League'">Premier League</h2>
         </div>
         <div class="card-center">
@@ -167,12 +172,13 @@
                  class="league-logo"
                  onerror="this.src='https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg'">
         </div>
+        </a>
     </div>
 
     <!-- 2. La Liga -->
     <div class="league-card" id="league-card2" style="border-top: 4px solid #ec6c11;">
+        <a th:href="@{/leagues/2/teams}" class="league-card" >
         <div class="card-top">
-            <div class="checkbox-box"></div>
             <h2 class="league-name" th:text="${laLigaName} ?: 'La Liga'">La Liga</h2>
         </div>
         <div class="card-center">
@@ -180,11 +186,14 @@
             <img th:src= "@{/images/LaLiga.svg}"
                  alt="La Liga Logo"
                  class="league-logo">
-        </div>
+            </div>
+            </a>
     </div>
+
 
     <!-- 3. Serie A -->
     <div class="league-card" id="league-card3" style="border-top: 4px solid #000000">
+        <a th:href="@{/ligues/3/teams}" class="league-card" >
         <div class="card-top">
             <div class="checkbox-box"></div>
             <h2 class="league-name" th:text="${serieAName} ?: 'Serie A'">Serie A</h2>
@@ -195,12 +204,13 @@
                  alt="Serie A Logo"
                  class="league-logo">
         </div>
-    </div>
+            </a>
+        </div>
 
     <!-- 4. Bundesliga -->
     <div class="league-card" id="league-card4" style="border-top:4px solid #ee0808">
+        <a th:href="@{/leagues/4/teams}" class="league-card" >
         <div class="card-top">
-            <div class="checkbox-box"></div>
             <h2 class="league-name" th:text="${bundesligaName} ?: 'Bundesliga'">Bundesliga</h2>
         </div>
         <div class="card-center">
@@ -208,12 +218,13 @@
                  alt="Bundesliga Logo"
                  class="league-logo">
         </div>
+        </a>
     </div>
 
     <!-- 5. Ligue 1 -->
     <div class="league-card" id="league-card5" style="border-top: 4px solid #122dc8">
+        <a th:href="@{leagues/5/teams}" class="league-card" >
         <div class="card-top">
-            <div class="checkbox-box"></div>
             <h2 class="league-name" th:text="${ligue1Name} ?: 'Ligue 1'">Ligue 1</h2>
         </div>
         <div class="card-center">
@@ -222,6 +233,7 @@
                  alt="Ligue 1 Logo"
                  class="league-logo">
         </div>
+        </a>
     </div>
 
 </section>
