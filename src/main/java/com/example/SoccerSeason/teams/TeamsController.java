@@ -5,36 +5,39 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 
 @Controller
-@RequestMapping("/leagues")
 public class TeamsController {
 
     private final TeamServices teamServices;
 
-    public TeamsController( TeamServices teamServices){
+    public TeamsController(TeamServices teamServices) {
         this.teamServices = teamServices;
     }
 
-    @GetMapping("/{leaguesId}/teams")
-    public String ShowTeamsByLigue(@PathVariable int leaguesId, Model model){
-
-        List<Teams> teams = teamServices.getTeamsByLeagueId(leaguesId);
-        model.addAttribute("teams",teams);
-        String leagueName = switch (leaguesId){
-          case 1 -> "premier League";
-          case 2 -> "La Liga";
-          case 3 -> "Serie A";
-          case 4 -> "Bundesliga";
-          case 5 -> "Ligue 1";
-            default -> "European Football ligues";
-        };
-        model.addAttribute("leagueName", leagueName);
-        return  "teams";
+    @GetMapping("/teams")
+    public String showTeamsByLeagueRequestParam(@RequestParam("leagueId") int leagueId, Model model) {
+        return showTeamsByLeague(leagueId, model);
     }
 
+    @GetMapping("/leagues/{leaguesId}/teams")
+    public String showTeamsByLeague(@PathVariable int leaguesId, Model model) {
+        List<Teams> teams = teamServices.getTeamsByLeagueId(leaguesId);
+        model.addAttribute("clubs", teams);
+        String leagueName = switch (leaguesId) {
+            case 1 -> "Premier League";
+            case 2 -> "La Liga";
+            case 3 -> "Serie A";
+            case 4 -> "Bundesliga";
+            case 5 -> "Ligue 1";
+            default -> "European Football leagues";
+        };
+        model.addAttribute("leagueName", leagueName);
+        model.addAttribute("totalClubs", teams.size());
+        return "teams";
+    }
 }

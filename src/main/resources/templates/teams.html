@@ -58,7 +58,7 @@
             color: #555;
         }
 
-        /* Grille des clubs (4 colonnes, 2 lignes par exemple) */
+        /* Grille des clubs */
         .clubs-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -67,6 +67,7 @@
             width: 100%;
         }
 
+        /* Transformé en balise <a> mais gardant l'aspect visuel */
         .club-card {
             position: relative;
             display: flex;
@@ -75,6 +76,8 @@
             padding: 30px;
             border-right: 1px solid #dcd6cb;
             border-bottom: 1px solid #dcd6cb;
+            text-decoration: none; /* Supprime le soulignement du lien */
+            color: inherit;        /* Conserve la couleur du texte */
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
@@ -84,7 +87,7 @@
             border-right: none;
         }
 
-        /* Effet Hover (fond grisé et texte blanc au survol) */
+        /* Effet Hover */
         .club-card:hover {
             background-color: #a89f9e;
             color: #ffffff;
@@ -95,7 +98,7 @@
             color: #ffffff;
         }
 
-        /* Numéro de position du club (ex: 01, 02...) */
+        /* Numéro de position du club */
         .club-index {
             font-size: 10px;
             letter-spacing: 1px;
@@ -115,7 +118,6 @@
             transition: color 0.3s ease;
         }
 
-        /* Espace vide en bas pour conserver l'alignement visuel de l'image */
         .club-bottom {
             height: 15px;
         }
@@ -130,21 +132,49 @@
         <h1>Participating Clubs</h1>
     </div>
     <div class="header-right">
-        Clubs / 02
+        Clubs / <span th:text="${totalClubs} ?: 0">0</span>
     </div>
 </header>
 
 <!-- Grille des clubs -->
 <section class="clubs-grid">
 
-     Boucle Thymeleaf pour afficher les équipes de la liste passée par le contrôleur
-    <div class="club-card" th:each="club, iterStat : ${clubs}">
+    <!-- Chaque carte est maintenant un lien dynamique vers l'effectif de l'équipe -->
+    <a class="club-card"
+       th:each="club, iterStat : ${clubs}"
+       th:href="@{/teams/{id}/squad(id=${club.id})}">
+
         <div class="club-index" th:text="${iterStat.count < 10 ? '0' + iterStat.count : iterStat.count}">01</div>
         <h2 class="club-name" th:text="${club.name}">Manchester City</h2>
         <div class="club-bottom"></div>
-    </div>
+    </a>
 
 </section>
 
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const colors = [
+            "#e63946", "#f1faee", "#a8dadc", "#457b9d", "#1d3557",
+            "#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51",
+            "#b5179e", "#7209b7", "#3a0ca3", "#4cc9f0", "#f72585"
+        ];
+
+        const cards = document.querySelectorAll(".club-card");
+
+        cards.forEach(card => {
+            card.addEventListener("mouseenter", function () {
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                card.style.backgroundColor = randomColor;
+                card.style.color = "#ffffff";
+            });
+
+            card.addEventListener("mouseleave", function () {
+                card.style.backgroundColor = "";
+                card.style.color = "";
+            });
+        });
+    });
+</script>
 </html>

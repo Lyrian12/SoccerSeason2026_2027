@@ -169,20 +169,18 @@
         <!-- Liste des joueurs pour ce poste -->
         <div class="player-row" th:each="player, iterStat : ${positionEntry.value}">
             <div class="player-main">
-                <span class="player-number" th:text="${player.number}">02</span>
-                <span class="player-name" th:text="${player.name}">Kyle Walker</span>
+                <!-- Numéro ou ID du joueur -->
+                <span class="player-number" th:text="${iterStat.count}">01</span>
+                <!-- Affichage du Nom et du Prénom -->
+                <span class="player-name">
+            <span th:text="${player.name}">Nom</span> <strong th:text="${player.surname}">Prénom</strong>
+        </span>
             </div>
 
-            <!-- Statistiques dynamiques (injectées depuis le backend) -->
-            <div class="player-stats">
-                <div class="stat-item" th:each="stat : ${player.stats}">
-                    <span class="stat-label" th:text="${stat.key}">Top Speed</span>
-                    <span class="stat-value" th:text="${stat.value}">37.2 km/h</span>
-                </div>
-            </div>
+
 
             <!-- Badge du poste issu de l'Enum -->
-            <div class="position-badge" th:text="${player.positionCode}">RB</div>
+            <div class="position-badge" th:text="${#strings.replace(player.playerposition.name(), '_', ' ')}">RB</div>
         </div>
 
     </div>
