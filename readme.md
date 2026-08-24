@@ -39,7 +39,7 @@ frontend.`
 
 
 ## Step 1 : Clone The Project
-git clone https://github.com/lyrian12/SoccerSeason
+git clone https://github.com/lyrian12/SoccerSeason2026_2027
 cd SoccerSeason
 ## step 2 : Start the Database With Docker
 docker compose up -d  
